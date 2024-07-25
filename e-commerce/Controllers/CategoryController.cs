@@ -30,10 +30,12 @@ namespace e_commerce.Controllers
             return await _categoryService.GetByIdAsync(id);
         }
 
-        [HttpPost] 
-        public async Task<Category> Create([FromBody] Category category)
-        {
-            return await _categoryService.CreateAsync(category);
+        [HttpPost]
+        
+
+          public async Task<Category> Create([FromBody] Category category)
+         {
+          return await _categoryService.CreateAsync(category);
         }
 
         [HttpPut("{id}")]

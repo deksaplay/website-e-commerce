@@ -25,11 +25,21 @@ namespace e_commerce.Controllers
             return View(cats);
         }
 
-     public async Task<IActionResult> Create([FromBody] Category category)
-      {
-        var createdCategory = await _categoryService.CreateAsync(category);
-         return RedirectToAction(nameof(Index)); // or return a appropriate response
+        [Route("admin/CreateCategory/[controller]")]
+        public async Task<IActionResult> Create(Category category)
+
+        {
+            if (ModelState.IsValid)
+            {
+                var cats = await _categoryService.CreateAsync(category);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(category);
         }
-    }
+
+
+
+
+        }
 }
 

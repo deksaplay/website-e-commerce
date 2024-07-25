@@ -8,6 +8,8 @@ namespace e_commerce.Services
     {
         public CategoryService(ApplicationDbContext context) : base(context)
         {
+           
         }
+       
     }
 }
