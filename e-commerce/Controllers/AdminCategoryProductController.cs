@@ -6,7 +6,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using e_commerce.Base;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
-
+using e_commerce.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace e_commerce.Controllers
 {
@@ -25,21 +26,116 @@ namespace e_commerce.Controllers
             return View(cats);
         }
 
-        [Route("admin/CreateCategory/[controller]")]
-        public async Task<IActionResult> Create(Category category)
 
+        [HttpGet]
+        [Route("admin/CreateCategory")]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [Route("admin/CreateCategory")]
+        public async Task<IActionResult> Create(Category category)
         {
             if (ModelState.IsValid)
             {
-                var cats = await _categoryService.CreateAsync(category);
+                await _categoryService.CreateAsync(category);
                 return RedirectToAction(nameof(Index));
             }
             return View(category);
         }
 
+        //     [Route("admin/CreateCategory")]
+        //   public async Task<IActionResult> Create(Category category)
+
+        //  {
+        //      if (ModelState.IsValid)
+        //    {
+        //       var cats = await _categoryService.CreateAsync(category);
+        //      return RedirectToAction(nameof(Index));
+        //    }
+        //    return View(category);
+        // }
+
+        //update category
+        [HttpGet]
+        [Route("admin/UpdateCategory/{id}")]
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null || id <= 0)
+            {
+                return NotFound();
+            }
+
+            Category categoryFromDB = await _categoryService.GetByIdAsync(id.Value);
+            if (categoryFromDB == null)
+            {
+                return NotFound();
+            }
+
+            return View(categoryFromDB);
+        }
+        [HttpPost]
+        [Route("admin/UpdateCategory")]
+        public async Task<IActionResult> Edit(Category category)
+        {
+            if (ModelState.IsValid)
+            {
+                await _categoryService.UpdateAsync(category);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(category);
+        }
+
+        //delete category
+        [HttpPost]
+        [Route("admin/DeleteCategory/{id}")]
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null || id <= 0)
+            {
+                return NotFound();
+            }
+
+            Category categoryFromDB = await _categoryService.GetByIdAsync(id.Value);
+            if (categoryFromDB == null)
+            {
+                return NotFound(nameof(Category));
+            }
+            await _categoryService.DeleteAsync(id.Value);
+            return RedirectToAction(nameof(Index));
+        }
 
 
+        [HttpPost]
+        [Route("admin/DeleteCategory")]
+        public async Task<IActionResult> DeletePOST(int? id)
+
+        {
+            if (id == null || id <= 0)
+            {
+                return NotFound();
+            }
+
+            Category? categoryFromDB = await _categoryService.GetByIdAsync(id.Value);
+            if (categoryFromDB == null)
+            {
+                return NotFound(nameof(Category));
+            }
+
+            await _categoryService.DeleteAsync(id.Value);
+            return RedirectToAction(nameof(Index));
 
         }
+       
+
+
+
+
+
+
+
+    }
 }
 
