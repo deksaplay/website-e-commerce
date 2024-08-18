@@ -46,18 +46,6 @@ namespace e_commerce.Controllers.Admin
             return View("~/Views/Admin/CategoryProduct/Create.cshtml", category);
         }
 
-        //     [Route("admin/CreateCategory")]
-        //   public async Task<IActionResult> Create(Category category)
-
-        //  {
-        //      if (ModelState.IsValid)
-        //    {
-        //       var cats = await _categoryService.CreateAsync(category);
-        //      return RedirectToAction(nameof(Index));
-        //    }
-        //    return View("~/Views/Admin/CategoryProduct/Create.cshtml", category);
-        // }
-
         //update category
         [HttpGet]
         [Route("UpdateCategory/{id}")]
@@ -89,7 +77,7 @@ namespace e_commerce.Controllers.Admin
         }
 
         //delete category
-        [HttpPost]
+        [HttpGet]
         [Route("DeleteCategory/{id}")]
         public async Task<IActionResult> Delete(int? id)
         {
@@ -101,15 +89,15 @@ namespace e_commerce.Controllers.Admin
             Category categoryFromDB = await _categoryService.GetByIdAsync(id.Value);
             if (categoryFromDB == null)
             {
-                return NotFound(nameof(Category));
+                return NotFound();
             }
-            await _categoryService.DeleteAsync(id.Value);
-            return RedirectToAction(nameof(Index));
+
+            return View("~/Views/Admin/CategoryProduct/delete.cshtml", categoryFromDB);
         }
 
 
         [HttpPost]
-        [Route("DeleteCategory")]
+        [Route("DeleteCategory/{id}")]
         public async Task<IActionResult> DeletePOST(int? id)
 
         {

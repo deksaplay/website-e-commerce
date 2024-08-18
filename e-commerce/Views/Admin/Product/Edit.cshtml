@@ -4,7 +4,7 @@
 }
 
 
-@model e_commerce.Models.Category
+@model e_commerce.Models.Product
 
 
 
@@ -14,25 +14,40 @@
 <form method="post">
     <div class="border p-3 mt-4">
         <div class="row pb-2">
-            <h2 class="text-primary">Edit Category</h2>
+            <h2 class="text-primary">Edit Product</h2>
             <hr />
         </div>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="mb-3 row p-1">
+        <div class="mb-3 row p-1"></div>
 
             <label asp-for="Name" class="p-0"></label>
-            
+            <div class="col-sm-10">
                 <input asp-for="Name" type="text" class="form-control" />
             <span asp-validation-for="Name" class="text-danger"></span>
 
         </div>
-        <div class="mb-3 row p-1">
+        <div class="mb-3 row p-1"></div>
 
                 <label asp-for="Description" class="p-0"></label>
-               
+                <div class="col-sm-10">
                     <input asp-for="Description" type="text" class="form-control" />
             <span asp-validation-for="Description" class="text-danger"></span>
         </div>
+                <div class="mb-3 row p-1">
+
+                    <label asp-for="Price" class="p-0"></label>
+                    <div class="col-sm-10">
+                        <input asp-for="Price" type="text" class="form-control" />
+                        <span asp-validation-for="Price" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3 row p-1">
+
+                        <label asp-for="Stock" class="p-0"></label>
+                        <div class="col-sm-10">
+                            <input asp-for="Stock" type="text" class="form-control" />
+                            <span asp-validation-for="Stock" class="text-danger"></span>
+                        </div>
+                      
             <div class="row mt-3">
 
                 <div class="col-6 col-md-3 mb-3">
@@ -40,7 +55,7 @@
                 </div>
 
                 <div class="col-6 col-md-3 mb-3">
-                    <a asp-controller="CategoryProduct" asp-action="index" class="btn btn-secondary border form-control">
+                    <a asp-controller="Product" asp-action="index" class="btn btn-secondary border form-control">
                         Back To List
                     </a>
                 </div>
@@ -49,7 +64,7 @@
         </div>
 
 
-   
+    </div>
 </form>
 @section Scripts {
     @{

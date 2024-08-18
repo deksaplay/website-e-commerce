@@ -3,7 +3,7 @@ using e_commerce.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-namespace e_commerce.Controllers
+namespace e_commerce.Controllers.Api
 {
     public class ProductController : BaseController
     {
