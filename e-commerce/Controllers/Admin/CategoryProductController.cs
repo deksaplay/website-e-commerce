@@ -9,13 +9,13 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using e_commerce.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace e_commerce.Controllers
+namespace e_commerce.Controllers.Admin
 {
     [Route("admin/[controller]")]
-    public class AdminCategoryProductController : Controller
+    public class CategoryProductController : Controller
     {
         private readonly CategoryService _categoryService;
-        public AdminCategoryProductController(CategoryService categoryService)
+        public CategoryProductController(CategoryService categoryService)
         {
             _categoryService = categoryService;
         }
@@ -23,7 +23,7 @@ namespace e_commerce.Controllers
         {
             var cats = await _categoryService.GetAllAsync();
 
-            return View(cats);
+            return View("~/Views/Admin/CategoryProduct/Index.cshtml", cats);
         }
 
 
@@ -31,7 +31,7 @@ namespace e_commerce.Controllers
         [Route("CreateCategory")]
         public IActionResult Create()
         {
-            return View();
+            return View("~/Views/Admin/CategoryProduct/Create.cshtml");
         }
 
         [HttpPost]
@@ -43,7 +43,7 @@ namespace e_commerce.Controllers
                 await _categoryService.CreateAsync(category);
                 return RedirectToAction(nameof(Index));
             }
-            return View(category);
+            return View("~/Views/Admin/CategoryProduct/Create.cshtml", category);
         }
 
         //     [Route("admin/CreateCategory")]
@@ -55,7 +55,7 @@ namespace e_commerce.Controllers
         //       var cats = await _categoryService.CreateAsync(category);
         //      return RedirectToAction(nameof(Index));
         //    }
-        //    return View(category);
+        //    return View("~/Views/Admin/CategoryProduct/Create.cshtml", category);
         // }
 
         //update category
@@ -74,7 +74,7 @@ namespace e_commerce.Controllers
                 return NotFound();
             }
 
-            return View(categoryFromDB);
+            return View("~/Views/Admin/CategoryProduct/Edit.cshtml", categoryFromDB);
         }
         [HttpPost]
         [Route("UpdateCategory/{id}")]
@@ -85,7 +85,7 @@ namespace e_commerce.Controllers
                 await _categoryService.UpdateAsync(category);
                 return RedirectToAction(nameof(Index));
             }
-            return View(category);
+            return View("~/Views/Admin/CategoryProduct/Edit.cshtml", category);
         }
 
         //delete category
@@ -128,7 +128,7 @@ namespace e_commerce.Controllers
             return RedirectToAction(nameof(Index));
 
         }
-       
+
 
 
 
