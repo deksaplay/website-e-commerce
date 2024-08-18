@@ -28,14 +28,14 @@ namespace e_commerce.Controllers
 
 
         [HttpGet]
-        [Route("admin/CreateCategory")]
+        [Route("CreateCategory")]
         public IActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
-        [Route("admin/CreateCategory")]
+        [Route("CreateCategory")]
         public async Task<IActionResult> Create(Category category)
         {
             if (ModelState.IsValid)
@@ -60,7 +60,7 @@ namespace e_commerce.Controllers
 
         //update category
         [HttpGet]
-        [Route("admin/UpdateCategory/{id}")]
+        [Route("UpdateCategory/{id}")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || id <= 0)
@@ -77,7 +77,7 @@ namespace e_commerce.Controllers
             return View(categoryFromDB);
         }
         [HttpPost]
-        [Route("admin/UpdateCategory")]
+        [Route("UpdateCategory")]
         public async Task<IActionResult> Edit(Category category)
         {
             if (ModelState.IsValid)
@@ -90,7 +90,7 @@ namespace e_commerce.Controllers
 
         //delete category
         [HttpPost]
-        [Route("admin/DeleteCategory/{id}")]
+        [Route("DeleteCategory/{id}")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || id <= 0)
@@ -109,7 +109,7 @@ namespace e_commerce.Controllers
 
 
         [HttpPost]
-        [Route("admin/DeleteCategory")]
+        [Route("DeleteCategory")]
         public async Task<IActionResult> DeletePOST(int? id)
 
         {
