@@ -77,7 +77,7 @@ namespace e_commerce.Controllers
             return View(categoryFromDB);
         }
         [HttpPost]
-        [Route("UpdateCategory")]
+        [Route("UpdateCategory/{id}")]
         public async Task<IActionResult> Edit(Category category)
         {
             if (ModelState.IsValid)
