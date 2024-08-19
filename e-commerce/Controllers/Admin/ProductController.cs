@@ -100,15 +100,23 @@ namespace e_commerce.Controllers.Admin
                 return NotFound();
             }
 
-            Product? productFromDB = await _productService.GetByIdAsync(id.Value);
-            if (productFromDB == null)
+            Product? productFromDB = null;
+            try
             {
-                return NotFound(nameof(Product));
+                productFromDB = await _productService.GetByIdAsync(id.Value);
+                if (productFromDB == null)
+                {
+                    return NotFound(nameof(Product));
+                }
+
+                await _productService.DeleteAsync(id.Value);
+                return RedirectToAction(nameof(Index));
             }
-
-            await _productService.DeleteAsync(id.Value);
-            return RedirectToAction(nameof(Index));
-
+            catch (Exception ex)
+            {
+                ViewData["ErrorMsg"] = ex.Message;
+                return View("~/Views/Admin/Product/delete.cshtml", productFromDB);
+            }
         }
     }
 }
