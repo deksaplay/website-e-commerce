@@ -28,8 +28,10 @@
         <th>Description</th>
         <th>Price</th>
         <th>Stock</th>
-        <th>Createat</th>
-        <th>updateat</th>
+            <th>Category</th>
+        <th>ImagePath</th>
+            <th>CreatedAt</th>
+            <th>UpdatedAt</th>
         <th></th>
     </tr>
 @foreach (var item in Model)
@@ -42,8 +44,10 @@
                 <td>@item.Description</td>
                 <th>@item.Price</th>
                 <th>@item.Stock</th>
+                <th>@item.CategoryId</th>
+                <th>   <img src="@item.ImagePath" alt="@item.Name" style="width: 150px; height: 150px;" /></th>
                 <td>@item.CreatedAt</td>
-                <td>@item.CreatedAt</td>
+                <td>@item.UpdatedAt</td>
                 <td>
                     <div class="w-75 btn-group" role="group">
                         <a asp asp-controller="Product" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary mx-2">

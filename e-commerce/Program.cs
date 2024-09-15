@@ -22,7 +22,13 @@ namespace e_commerce
             builder.Services.AddScoped<CategoryService>();
             builder.Services.AddScoped<CartService>();
             builder.Services.AddScoped<CheckoutService>();
-            builder.Services.AddScoped<ProductService>();
+            // builder.Services.AddScoped<ProductService>();
+            builder.Services.AddScoped<ProductService>(sp =>
+                new ProductService(
+                    sp.GetRequiredService<ApplicationDbContext>(),
+                    sp.GetRequiredService<IWebHostEnvironment>()
+                )
+            );
             builder.Services.AddScoped<PaymentService>();
             builder.Services.AddScoped<OrderService>();
             builder.Services.AddScoped<CustomerService>();

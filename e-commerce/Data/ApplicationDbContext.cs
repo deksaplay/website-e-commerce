@@ -23,8 +23,10 @@ namespace e_commerce.Data
         public DbSet<Report> Reports { get; set; }
         public DbSet<Wishlist> Wishlists { get; set; }
         public DbSet<Review> Reviews { get; set; }
-
-
+       
+        
 
     }
+
+    
 }
